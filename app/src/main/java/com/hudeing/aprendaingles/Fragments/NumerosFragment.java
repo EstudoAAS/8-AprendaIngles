@@ -74,13 +74,16 @@ public class NumerosFragment extends Fragment implements View.OnClickListener {
     }
 
     public void tocarSom(int raw) {
-        mediaPlayer = MediaPlayer.create(getActivity(),raw);
-        mediaPlayer.start();
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(getActivity(), raw);
+            mediaPlayer.start();
+        }
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 mediaPlayer.release();
+                mediaPlayer = null;
             }
         });
 

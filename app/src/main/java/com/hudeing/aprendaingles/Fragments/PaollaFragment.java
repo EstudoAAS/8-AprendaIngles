@@ -18,6 +18,7 @@ import com.hudeing.aprendaingles.R;
 public class PaollaFragment extends Fragment implements View.OnClickListener {
     private ImageButton buttonYoshi, buttonInterrogation;
     private MediaPlayer mediaPlayer;
+    private int length = 0;
 
     public PaollaFragment() {
         // Required empty public constructor
@@ -51,13 +52,16 @@ public class PaollaFragment extends Fragment implements View.OnClickListener {
     }
 
     public void tocarSom(int raw) {
-        mediaPlayer = MediaPlayer.create(getActivity(),raw);
-        mediaPlayer.start();
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(getActivity(), raw);
+            mediaPlayer.start();
+        }
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 mediaPlayer.release();
+                mediaPlayer = null;
             }
         });
 
@@ -68,7 +72,29 @@ public class PaollaFragment extends Fragment implements View.OnClickListener {
         super.onDestroy();
         if (mediaPlayer != null) {
             mediaPlayer.release();
-            mediaPlayer =null;
+            mediaPlayer = null;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mediaPlayer != null)
+            if(mediaPlayer.isPlaying()) {
+                mediaPlayer.pause();
+                this.length = mediaPlayer.getCurrentPosition();
+            }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mediaPlayer != null)
+            if(length != 0) {
+                mediaPlayer.seekTo(length);
+                mediaPlayer.start();
+                this.length = 0;
+            }
+
     }
 }

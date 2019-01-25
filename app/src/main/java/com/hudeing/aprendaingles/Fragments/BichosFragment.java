@@ -54,27 +54,33 @@ public class BichosFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonCao:
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.dog);
+                if (mediaPlayer == null)
+                    mediaPlayer = MediaPlayer.create(getActivity(), R.raw.dog);
                 tocarSom();
                 break;
             case R.id.buttonGato:
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.cat);
+                if (mediaPlayer == null)
+                    mediaPlayer = MediaPlayer.create(getActivity(), R.raw.cat);
                 tocarSom();
                 break;
             case R.id.buttonLeao:
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.lion);
+                if (mediaPlayer == null)
+                    mediaPlayer = MediaPlayer.create(getActivity(), R.raw.lion);
                 tocarSom();
                 break;
             case R.id.buttonMacaco:
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.monkey);
+                if (mediaPlayer == null)
+                    mediaPlayer = MediaPlayer.create(getActivity(), R.raw.monkey);
                 tocarSom();
                 break;
             case R.id.buttonOvelha:
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.sheep);
+                if (mediaPlayer == null)
+                    mediaPlayer = MediaPlayer.create(getActivity(), R.raw.sheep);
                 tocarSom();
                 break;
             case R.id.buttonVaca:
-                mediaPlayer = MediaPlayer.create(getActivity(), R.raw.cow);
+                if (mediaPlayer == null)
+                    mediaPlayer = MediaPlayer.create(getActivity(), R.raw.cow);
                 tocarSom();
                 break;
         }
@@ -87,6 +93,7 @@ public class BichosFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     mediaPlayer.release();
+                    mediaPlayer = null;
                 }
             });
         }
@@ -97,7 +104,7 @@ public class BichosFragment extends Fragment implements View.OnClickListener {
         super.onDestroy();
         if (mediaPlayer != null) {
             mediaPlayer.release();
-            mediaPlayer =null;
+            mediaPlayer = null;
         }
     }
 }
