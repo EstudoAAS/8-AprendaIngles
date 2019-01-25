@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.hudeing.aprendaingles.Fragments.BichosFragment;
 import com.hudeing.aprendaingles.Fragments.NumerosFragment;
+import com.hudeing.aprendaingles.Fragments.PaollaFragment;
 import com.hudeing.aprendaingles.Fragments.VogaisFragment;
 import com.hudeing.aprendaingles.R;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.string.str_bichos, BichosFragment.class)
                 .add(R.string.str_numeros, NumerosFragment.class)
                 //.add(R.string.str_vogais, VogaisFragment.class)
+                .add(R.string.str_paolla, PaollaFragment.class)
                 .create()
         );
 
